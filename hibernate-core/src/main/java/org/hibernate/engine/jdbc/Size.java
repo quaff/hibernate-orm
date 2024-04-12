@@ -20,6 +20,8 @@ import java.io.Serializable;
  * @author Steve Ebersole
  */
 public class Size implements Serializable {
+
+	@Deprecated( since = "6.5", forRemoval = true )
 	public enum LobMultiplier {
 		NONE( 1 ),
 		K( NONE.factor * 1024 ),
@@ -60,7 +62,9 @@ public class Size implements Serializable {
 	 * @param scale numeric scale
 	 * @param length type length
 	 * @param lobMultiplier LOB length multiplier
+	 * @deprecated in favor of {@link Size#Size(Integer, Integer, Long)}
 	 */
+	@Deprecated( since = "6.5", forRemoval = true )
 	public Size(Integer precision, Integer scale, Long length, LobMultiplier lobMultiplier) {
 		this.precision = precision;
 		this.scale = scale;
@@ -68,11 +72,21 @@ public class Size implements Serializable {
 		this.lobMultiplier = lobMultiplier;
 	}
 
+	/**
+	 * @deprecated in favor of {@link Size#Size(Integer, Integer, Long)}
+	 */
+	@Deprecated( since = "6.5", forRemoval = true )
 	public Size(Integer precision, Integer scale, Integer length, LobMultiplier lobMultiplier) {
 		this.precision = precision;
 		this.scale = scale;
 		this.length = length == null ?  null : length.longValue();
 		this.lobMultiplier = lobMultiplier;
+	}
+
+	public Size(Integer precision, Integer scale, Long length) {
+		this.precision = precision;
+		this.scale = scale;
+		this.length = length;
 	}
 
 	public static Size nil() {
@@ -111,6 +125,7 @@ public class Size implements Serializable {
 		return arrayLength;
 	}
 
+	@Deprecated( since = "6.5", forRemoval = true )
 	public LobMultiplier getLobMultiplier() {
 		return lobMultiplier;
 	}
@@ -141,6 +156,7 @@ public class Size implements Serializable {
 		return this;
 	}
 
+	@Deprecated( since = "6.5", forRemoval = true )
 	public Size setLobMultiplier(LobMultiplier lobMultiplier) {
 		this.lobMultiplier = lobMultiplier;
 		return this;
